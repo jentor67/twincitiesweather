@@ -1,0 +1,123 @@
+@import url(//fonts.googleapis.com/css?family=Lato:700);
+
+body {
+    margin:10px auto;
+    font-family:'Lato', sans-serif;
+ /*   text-align:center; */
+    color: #FFFFFF;
+    width: 960px;
+    background-color: #222222;
+    /*    background-image:url("../Images/green_space.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    */
+}
+
+table
+{
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse:collapse;
+    font-size : 75%;
+}
+
+
+.table_color_green {
+    border: 1px solid green;
+    text-align:center;
+}
+
+.table_summary {
+    text-align:left;
+}
+
+#image1 {
+    width: 240px;
+    height: 160px;
+}
+
+#image1:active {
+    width: 600px;
+    height: 400px;
+}
+
+#image2 {
+    width: 240px;
+    height: 160px;
+}
+
+#map_canvas {
+    position:absolute;
+    width: 769px;
+    height: 578px;
+    top: 100px;
+    left: 170px;
+    border: 2px solid black;
+    /*margin-left:auto;
+    margin-right:auto; */
+}
+
+#map_legend {
+    position:absolute;
+    top:100px;
+    left:10px;
+    width: 140px;
+    height: 140px;
+    background-color:#b0e0e6;
+    text-align:left;
+    border: 2px solid black;
+    padding: 5px;
+}
+
+#graph_group {
+    position:absolute;
+    top:350px;
+    left: 949px;
+
+}
+#graph_div {
+    width: 240px;
+    height: 140px;
+}
+
+#station_info {
+    position:absolute;
+    top:100px;
+    left:949px;
+    width: 280px;
+    text-align:left;
+    background-color:#b0e0e6;
+    border:1px solid red;
+    padding: 5px;
+}
+
+#station_select {
+    position: absolute;
+    top:70px;
+    left:170px;
+    width: 769px;
+}
+
+#back_history {
+    position:absolute;
+    top:300px;
+    left:949px;
+    width: 280px;
+    text-align:left;
+}
+
+#title_space {
+    position: absolute;
+    top:10px;
+    left:170px;
+    width: 769px;
+    text-align: center;
+}
+
+#weather_forcast {
+    position: absolute;
+    top:700px;
+    left:170px;
+    width: 769px;
+    text-align: left;
+}
