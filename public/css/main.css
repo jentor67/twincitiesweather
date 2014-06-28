@@ -1,18 +1,5 @@
 @import url(//fonts.googleapis.com/css?family=Lato:700);
 
-body {
-    margin:10px auto;
-    font-family:'Lato', sans-serif;
- /*   text-align:center; */
-    color: #FFFFFF;
-    width: 960px;
-    background-color: #222222;
-    /*    background-image:url("../Images/green_space.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-    */
-}
-
 table
 {
     margin-left: auto;
@@ -21,6 +8,10 @@ table
     font-size : 75%;
 }
 
+li {
+    position: relative;
+    left: -20px;
+}
 
 .table_color_green {
     border: 1px solid green;
@@ -33,7 +24,7 @@ table
 
 #image1 {
     width: 240px;
-    height: 160px;
+    height: 120px;
 }
 
 #image1:active {
@@ -43,15 +34,15 @@ table
 
 #image2 {
     width: 240px;
-    height: 160px;
+    height: 120px;
 }
 
 #map_canvas {
     position:absolute;
-    width: 769px;
-    height: 578px;
+    width: 669px;
+    height: 478px;
     top: 100px;
-    left: 170px;
+    left: 270px;
     border: 2px solid black;
     /*margin-left:auto;
     margin-right:auto; */
@@ -63,7 +54,7 @@ table
     left:10px;
     width: 140px;
     height: 140px;
-    background-color:#b0e0e6;
+    background-color: #d6d2e6;
     text-align:left;
     border: 2px solid black;
     padding: 5px;
@@ -71,13 +62,13 @@ table
 
 #graph_group {
     position:absolute;
-    top:350px;
-    left: 949px;
+    top:300px;
+    left: 10px;
 
 }
 #graph_div {
     width: 240px;
-    height: 140px;
+    height: 120px;
 }
 
 #station_info {
@@ -87,21 +78,21 @@ table
     width: 280px;
     text-align:left;
     background-color:#b0e0e6;
-    border:1px solid red;
+    border:1px solid black;
     padding: 5px;
 }
 
 #station_select {
     position: absolute;
     top:70px;
-    left:170px;
+    left:300px;
     width: 769px;
 }
 
 #back_history {
     position:absolute;
-    top:300px;
-    left:949px;
+    top:260px;
+    left:10px;
     width: 280px;
     text-align:left;
 }
@@ -114,10 +105,97 @@ table
     text-align: center;
 }
 
-#weather_forcast {
+#weather_forecast {
     position: absolute;
-    top:700px;
+    top:690px;
     left:170px;
     width: 769px;
     text-align: left;
 }
+
+#forecast_box {
+    position: absolute;
+    top:600px;
+    left:270px;
+    width: 860px;
+    text-align: left;
+}
+#forecast_title {
+    font-size: 9pt;
+    line-height: 50%;
+    font-weight: 900;
+    font-family:arial, sans-serif;
+    width: 74px;
+    height: 30px;
+    text-align: center;
+    float: left;
+}
+
+#forecast_temperature {
+    font-size: 9pt;
+    line-height: 50%;
+    font-family:arial, sans-serif;
+    top: 30px;
+    width: 69px;
+    float: left;
+    text-align: center;
+    padding-right: 5px;
+}
+
+#forecast_error {
+    font-size: 8pt;
+    line-height: 20%;
+    color: black;
+    font-weight: 900;
+    font-family:arial, sans-serif;
+    top: 30px;
+    width: 69px;
+    float: left;
+    text-align: center;
+    padding-right: 5px;
+}
+
+#forecast_detail {
+    font-size: 8pt;
+    line-height: 95%;
+    font-family:arial, sans-serif;
+    top: 30px;
+    width: 69px;
+    float: left;
+    text-align: center;
+    padding-right: 5px;
+}
+
+
+#forecast_title_row {
+    position: absolute;
+    top:0;
+    width: 860px;
+    text-align: left;
+}
+
+#forecast_temperature_row {
+    position: absolute;
+    top:50px;
+    width: 860px;
+    text-align: left;
+}
+
+#forecast_error_row {
+    position: absolute;
+    top:30px;
+    left:15px;
+    width: 860px;
+    text-align: left;
+    color: #ffff00;
+    font-size: 8pt;
+    font-weight: 900;
+}
+
+#forecast_detail_row {
+    position: absolute;
+    top:80px;
+    width: 860px;
+    text-align: left;
+}
+

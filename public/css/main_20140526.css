@@ -54,7 +54,7 @@ li {
     left:10px;
     width: 140px;
     height: 140px;
-    background-color: #d6d2e6;
+    background-color: #ffef80;
     text-align:left;
     border: 2px solid black;
     padding: 5px;
@@ -77,7 +77,7 @@ li {
     left:949px;
     width: 280px;
     text-align:left;
-    background-color:#b0e0e6;
+    background-color: #ffef80;
     border:1px solid black;
     padding: 5px;
 }
@@ -198,4 +198,13 @@ li {
     width: 860px;
     text-align: left;
 }
+
+
+
+
+
+
+
+
+
 

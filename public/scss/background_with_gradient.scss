@@ -1,0 +1,17 @@
+@mixin background_with_gradient($start,$finish) {
+  background: -webkit-linear-gradient($start,$finish); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient($start,$finish); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient($start,$finish); /* For Firefox 3.6 to 15 */
+  background: linear-gradient($start,$finish); /* Standard syntax (must be last) */
+}
+
+body {
+  margin:10px auto;
+  font-family:'Lato', sans-serif;
+  color: #FFFFFF;
+  width: 960px;
+  height:1000px;
+
+  @include background_with_gradient(#021211,#0a7b77);
+
+}

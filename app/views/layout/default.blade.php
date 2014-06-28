@@ -43,6 +43,9 @@
 
 <html>
 
+
+
+
 <head>
     <title>{{ $title }}</title>
     <?php
@@ -86,10 +89,9 @@
                 {{ $station_element }}
             ]
 
-//            var latlng = new google.maps.LatLng(44.96, -93.207);
               var latlng = new google.maps.LatLng( {{ $lat_selected }}, {{ $lng_selected }});
             var mapOptions = {
-                zoom: 10,
+                zoom: 9,
                 center: latlng,
                 mapTypeId:google.maps.MapTypeId.ROADMAP
             };
@@ -138,8 +140,9 @@
     </script>
 
 
-    <link rel="stylesheet" type="text/css" href="<?php echo $shttp?>/css/main.css">
-
+    <link rel="stylesheet" type="text/css" href="<?php echo $shttp?>/css/main_20140625.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $shttp?>/css/background_with_gradient.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $shttp?>/css/jquery.datetimepicker.css">
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -148,9 +151,10 @@
     </script>
 
     <style type="text/css">
-        <?php echo $css_body; ?>
         <?php echo $css_image_box; ?>
     </style>
+
+
 
 
 </head>
@@ -167,7 +171,56 @@
     @yield('testing')
 
     @yield('station_forcast')
-</body>
 
+
+</body>
+<script src="<?php echo $shttp?>/js/jquery.js"></script>
+<script src="<?php echo $shttp?>/js/jquery.datetimepicker.js"></script>
+<script src="<?php echo $shttp?>/js/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function() {
+        $(".hidestats").click(function () {
+            $(".stats_show").toggle("slow");
+        });
+    });
+
+    $(document).ready(function() {
+        $(".hidegraphs").click(function () {
+            $(".graphs_show").toggle("slow");
+        });
+    });
+
+    $(document).ready(function() {
+        $(".hidepredictedtemperature").click(function () {
+            $(".predictedtemperature_show").toggle("slow");
+        });
+    });
+
+</script>
+<script>
+    var d = new Date();
+    var hour = d.getHours();
+    if(hour < 10) { hour = '0'+hour}
+    var minutes = d.getMinutes();
+    if(minutes < 10) { minutes = '0'+ minutes}
+    var toDay = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + hour + ':' + minutes;
+    var toDay_Day = d.getFullYear() + '/' + (d.getMonth()+1) + '/' + d.getDate();
+    $('#datetimepickerstart').datetimepicker();
+    $('#datetimepickerstart').datetimepicker({value: toDay, step:1});
+    $('#datetimepickerstop').datetimepicker();
+    $('#datetimepickerstop').datetimepicker({value: toDay, step:1});
+    $('#datetimepickerstop_edit').datetimepicker();
+    $('#datetimepickerstop_edit').datetimepicker({ step:1});
+
+    $('#dateworking').datetimepicker({
+        format:'Y/m/d',
+        value: toDay_Day,
+        timepicker:false
+    });
+
+
+
+</script>
 
 </html>
