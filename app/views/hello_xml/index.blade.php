@@ -100,30 +100,83 @@
     </div>
 @endforeach
 
+<?php
+    $avg_stat_row = 0;
+    $avg_stat[$avg_stat_row][] = 'Title';
+    $avg_stat[$avg_stat_row][] = 'Avg. High Temp F';
+    $avg_stat[$avg_stat_row][] = 'Avg. Low Temp F';
+    $avg_stat[$avg_stat_row][] = 'Avg. Rain in.';
+    $avg_stat[$avg_stat_row][] = 'Avg. Snow in.';
+    $avg_stat[$avg_stat_row][] = 'Avg. Snow Depth in.';
+    $avg_stat[$avg_stat_row][] = 'Max High Temp';
+    $avg_stat[$avg_stat_row][] = 'Min High Temp';
+    $avg_stat[$avg_stat_row][] = 'Max Low Temp';
+    $avg_stat[$avg_stat_row][] = 'Min Low Temp';
+    $avg_stat[$avg_stat_row][] = 'Max Rain';
+    $avg_stat[$avg_stat_row][] = 'Max Snow';
+    $avg_stat[$avg_stat_row][] = 'Max Snow Depth';
+    $avg_stat_row++;
+?>
+
 @foreach($average_stats as $average_stat)
-    <div id="average_stats" style="font-size: 12px; color: black;">
-        <div style="font-size: 14px;">Twin Cities 10 Year Stats on this Date</div>
-        <ul>
-            <li>Avg. High Temp: {{ number_format($average_stat->average_high,1) }} F</li>
-            <li>Avg. Low Temp: {{ number_format($average_stat->average_low,1)}} F</li>
-            <li>Avg. Rain: {{ number_format($average_stat->average_precipitation,2) }} inches</li>
-            <li>Avg. Snow: {{ number_format($average_stat->average_snow_fall,2) }} inches</li>
-            <li>Avg. Snow Depth: {{ number_format($average_stat->average_snow_depth,2) }} inches</li>
-
-            <button class="hidestats">More Stats</button>
-            <div class="stats_show" style="display:none">
-                <li>Max High Temp: {{ number_format($average_stat->maximum_high,1) }} F</li>
-                <li>Min High Temp: {{ number_format($average_stat->minimum_high,1) }} F</li>
-                <li>Max Low Temp: {{ number_format($average_stat->maximum_low,1) }} F</li>
-                <li>Min Low Temp: {{ number_format($average_stat->minimum_low,1)  }} F</li>
-                <li>Max Rain: {{ number_format($average_stat->maximum_precipitation,2) }} inches</li>
-                <li>Max Snow: {{ number_format($average_stat->maximum_snow_fall,2) }} inches</li>
-                <li>Max Snow Depth: {{ number_format($average_stat->maximum_snow_depth,2) }} inches</li>
-            </div>
-
-
-    </div>
+    <?php
+        $avg_stat[$avg_stat_row][] = $average_stat->Start_Year.'-'.($average_stat->End_Year-1);
+        $avg_stat[$avg_stat_row][] = number_format($average_stat->average_high1,1);
+        $avg_stat[$avg_stat_row][] = number_format($average_stat->average_low,1);
+        $avg_stat[$avg_stat_row][] = number_format($average_stat->average_precipitation,2);
+        $avg_stat[$avg_stat_row][] = number_format($average_stat->average_snow_fall,1);
+        $avg_stat[$avg_stat_row][] = number_format($average_stat->average_snow_depth,1);
+        $avg_stat[$avg_stat_row][] = number_format($average_stat->maximum_high,1);
+        $avg_stat[$avg_stat_row][] = number_format($average_stat->minimum_high,1);
+        $avg_stat[$avg_stat_row][] = number_format($average_stat->maximum_low,1);
+        $avg_stat[$avg_stat_row][] = number_format($average_stat->minimum_low,1);
+        $avg_stat[$avg_stat_row][] = number_format($average_stat->maximum_precipitation,1);
+        $avg_stat[$avg_stat_row][] = number_format($average_stat->maximum_snow_fall,1);
+        $avg_stat[$avg_stat_row][] = number_format($average_stat->maximum_snow_depth,1);
+        $avg_stat_row++;
+        $avg_stat_limit = $avg_stat_row;
+    ?>
 @endforeach
+<div id="average_stats" style="font-size: 12px; color: black;">
+    <div style="font-size: 14px;">Twin Cities Past Stats for Today</div>
+        <table>
+            <?php $avg_stat_column = 0; ?>
+            @while( $avg_stat_column < 6 )
+                <?php $avg_stat_row = 0; ?>
+                <tr>
+                    @while($avg_stat_row < $avg_stat_limit)
+                        @if( $avg_stat_row == 0 )
+                            <td width="100">{{ $avg_stat[$avg_stat_row][$avg_stat_column] }}</td>
+                        @else
+                            <td width="50" align="center">{{ $avg_stat[$avg_stat_row][$avg_stat_column] }}</td>
+                        @endif
+                        <?php $avg_stat_row++; ?>
+                    @endwhile
+                </tr>
+                <?php $avg_stat_column++; ?>
+            @endwhile
+         </table>
+        <button class="hidestats">More Stats</button>
+        <div class="stats_show" style="display:none">
+            <table>
+                @while( $avg_stat_column < 13 )
+                    <?php $avg_stat_row = 0; ?>
+                    <tr>
+                        @while($avg_stat_row < $avg_stat_limit)
+                            @if( $avg_stat_row == 0 )
+                            <td width="100">{{ $avg_stat[$avg_stat_row][$avg_stat_column] }}</td>
+                            @else
+                            <td width="50" align="center">{{ $avg_stat[$avg_stat_row][$avg_stat_column] }}</td>
+                            @endif
+                            <?php $avg_stat_row++; ?>
+                        @endwhile
+                    </tr>
+                    <?php $avg_stat_column++; ?>
+                @endwhile
+            </table>
+        </div>
+</div>
+
 
 
 
