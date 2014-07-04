@@ -40,7 +40,7 @@ class Hello_xml extends BaseController {
 
         $get_historic_daily_error = DB::select("call get_historic_error($stations_id,10,10);");
 
-        $get_average_stats = DB::select("call past_ten_year_stats();");
+        $get_average_stats = DB::select("call past_stats();");
 
         return View::make('hello_xml.index')
             ->with('observations',$kmsp_temperature)
