@@ -38,7 +38,8 @@ class Hello_xml extends BaseController {
 
         $get_36_hour_forecast = DB::select("call get_36_hour_forecast($stations_id);");
 
-        $get_historic_daily_error = DB::select("call get_historic_error($stations_id,10,10);");
+       // $get_historic_daily_error = DB::select("call get_historic_error($stations_id,10,10);");
+        $get_historic_daily_error = DB::select("call get_station_historic_error($stations_id);");
 
         $get_average_stats = DB::select("call past_stats();");
 
