@@ -3,9 +3,9 @@
 
 @section('testing')
 
-<div style="font-size: 14px; color: black" id="map_legend" xmlns="http://www.w3.org/1999/html">
+<div style="font-size: 12px; color: black" id="map_legend" xmlns="http://www.w3.org/1999/html">
     Map Legend
-    <div style="font-size: 10px;">
+    <div style="font-size: 8px;">
         <ul>
             <li><div style="color: blue;">
                 Wind below 10 mph
@@ -24,8 +24,8 @@
 <?php $location_name = ""; ?>
 @foreach($distinct_stations as $distinct_station)
     @if ($stations_id == $distinct_station->stations_id)
-        <div id="title_space">
-            <h1>Twin Cities Weather</h1>
+        <div id="title_space" style="font-size: 36px;">
+            Twin Cities Weather
             <?php $location_name = $distinct_station->location; ?>
         </div>
     @endif
@@ -83,8 +83,8 @@
         $date_format = date("l jS \of F Y @ h:i A",strtotime($observation->observation_time));
     ?>
 
-    <div id="station_info" style="font-size: 12px; color: black;">
-        <div style="font-size: 14px;">Weather at {{ $location_name }}</div>observed {{ $date_format }}
+    <div id="station_info" style="font-size: 10px; color: black;">
+        <div style="font-size: 12px;">Weather at {{ $location_name }}</div>observed {{ $date_format }}
         <ul>
             <li>Temperature: {{ $observation->temp_f }} F feels like: {{$observation->feelslike_f }} F</li>
             <li>Weather: {{ $observation->weather }} with {{ $observation->visibility_mi}} miles visibility</li>
@@ -96,7 +96,7 @@
                 <li>Rain today: {{ $observation->precip_today_in }} in</li>
             @endif
         </ul>
-        <p><img hspace=30 src= {{ $observation->icon_url }} >
+        <p><img hspace=30 src= {{ $observation->icon_url }} height=40 width=40 >
     </div>
 @endforeach
 
@@ -138,7 +138,7 @@
     ?>
 @endforeach
 <div id="average_stats" style="font-size: 12px; color: black;">
-    <div style="font-size: 14px;">Twin Cities Past Stats for Today</div>
+    <div style="font-size: 12px;">Twin Cities Past Statistics for Today</div>
         <table>
             <?php $avg_stat_column = 0; ?>
             @while( $avg_stat_column < 6 )
@@ -338,7 +338,7 @@
             $forecast_when[$x].="<p>".date('M j',strtotime($result_10_day_forecast->date_predict));
             $forecast_detail[$x]="";
             $forecast_detail[$x].="<p>".$result_10_day_forecast->condition_w;
-            $forecast_detail[$x].="<p><img src=".$result_10_day_forecast->icon_url.">";
+            $forecast_detail[$x].="<p><img src=".$result_10_day_forecast->icon_url." height=\"42\" width=\"42\">";
             $forecast_temperature[$x]=$result_10_day_forecast->high_f;
             if( $x == 0 ) $forecast_temperature[$x].=" <div class=\"predictedtemperature_show\" style=\"display:none\"><font><br /></font></div>";
             if( $x  > 0 ) $forecast_temperature[$x].=" <div class=\"predictedtemperature_show\" style=\"display:none\"><font color=#ffff00>".($result_10_day_forecast->high_f+$forecast_error_hi[$x])."&plusmn".$forecast_error_hi_std[$x]."</font></div>";
@@ -376,6 +376,31 @@
                 @endfor
             </div>
     </div>
+
+
+    <div id="copy_write" style="font-size: 8px;">
+        &copy 2014 twincitiesweather.info All Rights Reserved
+    </div>
+
+    <div id="advertising1">
+        <a href="http://www.visit-twincities.com/">
+            <img src="images/msptour_logo.png" width="199" height="58">
+        </a>
+    </div>
+
+    <div id="advertising2">
+        <a href="https://www.metrotransit.org/">
+            <img src="images/MetroTransitLogo.png" width="199" height="58">
+        </a>
+    </div>
+
+    <div id="advertising3">
+        <a href="http://www.wunderground.com/">
+            <img src="images/wunderground.jpg" width="142" height="107">
+        </a>
+    </div>
+
+
 @endsection
 
 @section('carousel')
