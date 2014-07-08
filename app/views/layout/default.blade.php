@@ -140,7 +140,7 @@
     </script>
 
 
-    <link rel="stylesheet" type="text/css" href="<?php echo $shttp?>/css/main_20140706.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $shttp?>/css/main_20140707.css">
     <link rel="stylesheet" type="text/css" href="<?php echo $shttp?>/css/background_with_gradient.css">
     <link rel="stylesheet" type="text/css" href="<?php echo $shttp?>/css/jquery.datetimepicker.css">
 

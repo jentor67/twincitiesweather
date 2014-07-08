@@ -352,29 +352,32 @@
     <div id="forecast_box">
         <div id="forecast_title_row">
             <div id="forecast_title">DAY<P>DATE</div>
-                <?php $max= sizeof($forecast_when); ?>
-                @for ($i = 0; $i < $max; $i++)
-                   <div id="forecast_title"><?php echo $forecast_when[$i] ?></div>
-                @endfor
-            </div>
+            <?php $max= sizeof($forecast_when); ?>
+            @for ($i = 0; $i < $max; $i++)
+               <div id="forecast_title"><?php echo $forecast_when[$i] ?></div>
+            @endfor
+
+        </div>
         <div id="forecast_error_row">
-            <button class="hidepredictedtemperature">Temperature accounting for resent errors</button>
+            <button class="hidepredictedtemperature" >Temperature accounting for resent errors</button>
             <div class="predictedtemperature_show" style="display:none">The value in yellow is accounting for resent predicted errors.</div>
         </div>
+
         <div id="forecast_temperature_row">
             <div id="forecast_temperature">HIGH<br><div class="predictedtemperature_show" style="display:none"><br /><br /></div>LOW</div>
-                <?php $max= sizeof($forecast_temperature); ?>
-                @for ($i = 0; $i < $max; $i++)
-                    <div id="forecast_temperature"><?php echo $forecast_temperature[$i] ?></div>
-                @endfor
-            </div>
+            <?php $max= sizeof($forecast_temperature); ?>
+            @for ($i = 0; $i < $max; $i++)
+                <div id="forecast_temperature"><?php echo $forecast_temperature[$i] ?></div>
+            @endfor
+        </div>
+
         <div id="forecast_detail_row">
             <div id="forecast_detail"><P></div>
-                <?php $max= sizeof($forecast_detail); ?>
-                @for ($i = 0; $i < $max; $i++)
-                    <div id="forecast_detail"><?php echo $forecast_detail[$i] ?></div>
-                @endfor
-            </div>
+            <?php $max= sizeof($forecast_detail); ?>
+            @for ($i = 0; $i < $max; $i++)
+                <div id="forecast_detail"><?php echo $forecast_detail[$i] ?></div>
+            @endfor
+        </div>
     </div>
 
 
@@ -396,7 +399,7 @@
 
     <div id="advertising3">
         <a href="http://www.wunderground.com/">
-            <img src="images/wunderground.jpg" width="142" height="107">
+            <img src="images/wunderground.jpg" width="170" height="128">
         </a>
     </div>
 
