@@ -61,15 +61,18 @@
             ?>
         @endforeach
     </select>
+    <?php
+        foreach ($photos as $photo) {
+            $station_element .= json_encode($photo);
+            $station_element .= ",";
+        }
+    ?>
+    {{ Form::close() }}
+
+
 </div>
 
-<?php
-    foreach ($photos as $photo) {
-        $station_element .= json_encode($photo);
-        $station_element .= ",";
-    }
-?>
-{{ Form::close() }}
+
 
 <?php
     $unique_value = '_'.$_SERVER['REMOTE_ADDR'].'-'.$_SERVER['REMOTE_PORT'];
@@ -137,54 +140,58 @@
         $avg_stat_limit = $avg_stat_row;
     ?>
 @endforeach
+
 <div id="average_stats" style="font-size: 12px; color: black;">
     <div style="font-size: 12px;">Twin Cities Past Statistics for Today</div>
+    <table>
+        <?php $avg_stat_column = 0; ?>
+        @while( $avg_stat_column < 6 )
+            <?php $avg_stat_row = 0; ?>
+            <tr>
+                @while($avg_stat_row < $avg_stat_limit)
+                    @if( $avg_stat_row == 0 )
+                        <td width="100">{{ $avg_stat[$avg_stat_row][$avg_stat_column] }}</td>
+                    @else
+                        <td width="50" align="center">{{ $avg_stat[$avg_stat_row][$avg_stat_column] }}</td>
+                    @endif
+                    <?php $avg_stat_row++; ?>
+                @endwhile
+            </tr>
+            <?php $avg_stat_column++; ?>
+        @endwhile
+     </table>
+    <button class="hidestats">More Stats</button>
+    <div class="stats_show" style="display:none">
         <table>
-            <?php $avg_stat_column = 0; ?>
-            @while( $avg_stat_column < 6 )
+            @while( $avg_stat_column < 13 )
                 <?php $avg_stat_row = 0; ?>
                 <tr>
                     @while($avg_stat_row < $avg_stat_limit)
                         @if( $avg_stat_row == 0 )
-                            <td width="100">{{ $avg_stat[$avg_stat_row][$avg_stat_column] }}</td>
+                        <td width="100">{{ $avg_stat[$avg_stat_row][$avg_stat_column] }}</td>
                         @else
-                            <td width="50" align="center">{{ $avg_stat[$avg_stat_row][$avg_stat_column] }}</td>
+                        <td width="50" align="center">{{ $avg_stat[$avg_stat_row][$avg_stat_column] }}</td>
                         @endif
                         <?php $avg_stat_row++; ?>
                     @endwhile
                 </tr>
                 <?php $avg_stat_column++; ?>
             @endwhile
-         </table>
-        <button class="hidestats">More Stats</button>
-        <div class="stats_show" style="display:none">
-            <table>
-                @while( $avg_stat_column < 13 )
-                    <?php $avg_stat_row = 0; ?>
-                    <tr>
-                        @while($avg_stat_row < $avg_stat_limit)
-                            @if( $avg_stat_row == 0 )
-                            <td width="100">{{ $avg_stat[$avg_stat_row][$avg_stat_column] }}</td>
-                            @else
-                            <td width="50" align="center">{{ $avg_stat[$avg_stat_row][$avg_stat_column] }}</td>
-                            @endif
-                            <?php $avg_stat_row++; ?>
-                        @endwhile
-                    </tr>
-                    <?php $avg_stat_column++; ?>
-                @endwhile
-            </table>
-        </div>
+        </table>
+    </div>
+    <div id="analysis">
+        {{ Form::open(array('url' => 'analysis')) }}
+        {{ Form::submit('Go to Historic Analysis') }}
+        {{ Form::close() }}
+    </div>
 </div>
-
-
 
 
 <?php
     $hours_back=0;
     if( isset( $passed_hours_back ) ) $hours_back = $passed_hours_back;
     if( $hours_back == 0 ) $hours_back = 48;
-    $interval = round($hours_back/12);
+    $interval = round(($hours_back+36)/12);
 ?>
 
 <div id="back_history">
@@ -204,11 +211,19 @@
 @foreach($observations_rev as $observation)
     <?php
         $t_f[] = $observation->temp_f;
-//        $w_mph[] = $observation->wind_mph;
+
+        //** Getting the wind */
         $int_val = intval($observation->wind_mph);
         if( $int_val < 0) $w_mph[] =0;
         if( $int_val > 100) $w_mph[] = 0;
         if( $int_val <= 100 && $int_val >= 0) $w_mph[]=$int_val;
+
+        //** Getting the rain_fall */
+        $int_val = $observation->precip_1hr_in;
+        if( $int_val < 0) $rain[] =0;
+        if( $int_val > 100) $rain[] = 0;
+        if( $int_val <= 100 && $int_val >= 0) $rain[]=$int_val;
+
         $observation->relative_humidity = str_replace("%","",$observation->relative_humidity);
         $int_val = intval($observation->relative_humidity);
         //$humidity[] = $int_val;
@@ -227,9 +242,11 @@
         $t_f[] =  $result_36_hour_forecast->temp_f;
         $w_mph[] = $result_36_hour_forecast->wspd;
         $humidity[]= $result_36_hour_forecast->humidity;
+        $rain[] = $result_36_hour_forecast->qpf;
         $date_time_observation[]=date("M d \ng A", strtotime($result_36_hour_forecast->datetime_predict));
     ?>
 @endforeach
+
 
 <?php $size_of_array= sizeof($t_f) ?>
 @if ( $size_of_array > 1  )
@@ -264,6 +281,31 @@
                     require_once ('jpgraph/Graph1.php');
                     $Two_Graphs_Humidity = new Custom_Graphs();
                     $Two_Graphs_Humidity->interval = $interval;
+                    $Two_Graphs_Humidity->graph_data1 = $rain;
+                    $Two_Graphs_Humidity->graph_xdata = $date_time_observation;
+                    $Two_Graphs_Humidity->y1_title = "Rain in";
+                    $Two_Graphs_Humidity->color1 = "darkgreen";
+                    $Two_Graphs_Humidity->y2_title = "";
+                    $Two_Graphs_Humidity->x_title = "Date Time";
+                    $Two_Graphs_Humidity->title = "Rain";
+                    $Two_Graphs_Humidity->back_ticks = $passed_hours_back;
+
+                    $Two_Graphs_Humidity->file_name="images/cache/graph_rain".$unique_value.".png";
+                    $Two_Graphs_Humidity->graph_two( );
+                ?>
+                <div id="graph_div">
+                    <a class="fancybox" rel="group" href=<?php echo $Two_Graphs_Humidity->file_name; ?> >
+                        <img style='border:3px solid #FF3300' src=<?php echo $Two_Graphs_Humidity->file_name; ?> alt="" id="image2" />
+                    </a>
+                </div>
+
+
+
+
+                <?php
+                    require_once ('jpgraph/Graph1.php');
+                    $Two_Graphs_Humidity = new Custom_Graphs();
+                    $Two_Graphs_Humidity->interval = $interval;
                     $Two_Graphs_Humidity->graph_data1 = $humidity;
                     $Two_Graphs_Humidity->graph_xdata = $date_time_observation;
                     $Two_Graphs_Humidity->y1_title = "Humidity %";
@@ -281,7 +323,6 @@
                         <img style='border:3px solid #FF3300' src=<?php echo $Two_Graphs_Humidity->file_name; ?> alt="" id="image2" />
                     </a>
                 </div>
-
 
                 <?php
                     require_once ('jpgraph/Graph1.php');
@@ -314,13 +355,23 @@
 
 @section('station_forcast')
 
-    <?php $x=1;
+    <?php
+        $x=1;
         $forecast_error[0]="<p>Accuracy";
         $forecast_error[0].="<p>High";
         $forecast_error[0].="<p>Low";
     ?>
     @foreach($historic_daily_errors as $historic_daily_error)
         <?php
+            while($x < $historic_daily_error->days_back ) {
+                $forecast_error[$x]="<p> </p>";
+                $forecast_error_hi[$x]="NA";
+                $forecast_error_lo[$x]="NA";
+                $forecast_error_hi_std[$x]="NA";
+                $forecast_error_lo_std[$x]="NA";
+                $x++;
+            }
+
             $forecast_error[$x]="<p> </p>";
             $forecast_error_hi[$x]=number_format($historic_daily_error->hi_temp_error)."+-".number_format($historic_daily_error->hi_std);
             $forecast_error_lo[$x]=number_format($historic_daily_error->lo_temp_error)."+-".number_format($historic_daily_error->lo_std);
@@ -329,6 +380,18 @@
             $x++;
         ?>
     @endforeach
+
+    <?php
+        //***Just in in case the last set of days are missing***
+        while($x <= 10){
+            $forecast_error[$x]="<p> </p>";
+            $forecast_error_hi[$x]="NA";
+            $forecast_error_lo[$x]="NA";
+            $forecast_error_hi_std[$x]="NA";
+            $forecast_error_lo_std[$x]="NA";
+            $x++;
+        }
+    ?>
 
 
     <?php $x=0; ?>
@@ -341,9 +404,27 @@
             $forecast_detail[$x].="<p><img src=".$result_10_day_forecast->icon_url." height=\"42\" width=\"42\">";
             $forecast_temperature[$x]=$result_10_day_forecast->high_f;
             if( $x == 0 ) $forecast_temperature[$x].=" <div class=\"predictedtemperature_show\" style=\"display:none\"><font><br /></font></div>";
-            if( $x  > 0 ) $forecast_temperature[$x].=" <div class=\"predictedtemperature_show\" style=\"display:none\"><font color=#ffff00>".($result_10_day_forecast->high_f+$forecast_error_hi[$x])."&plusmn".$forecast_error_hi_std[$x]."</font></div>";
+//            if( $x  > 0 ) $forecast_temperature[$x].=" <div class=\"predictedtemperature_show\" style=\"display:none\"><font color=#ffff00>".($result_10_day_forecast->high_f+$forecast_error_hi[$x])."&plusmn".$forecast_error_hi_std[$x]."</font></div>";
+            if( $x  > 0 ) {
+                if( $forecast_error_hi[$x] == "NA"){
+                    $forecast_temperature[$x].=" <div class=\"predictedtemperature_show\" style=\"display:none\"><font color=#ffff00>NA</font></div>";
+                }
+                else{
+                    $forecast_temperature[$x].=" <div class=\"predictedtemperature_show\" style=\"display:none\"><font color=#ffff00>".($result_10_day_forecast->high_f+$forecast_error_hi[$x])."</font></div>";
+                }
+            }
+//            if( $x  > 0 ) $forecast_temperature[$x].=" <div class=\"predictedtemperature_show\" style=\"display:none\"><font color=#ffff00></font></div>";
             $forecast_temperature[$x].="<br>".$result_10_day_forecast->low_f;
-            if( $x  > 0 ) $forecast_temperature[$x].=" <div class=\"predictedtemperature_show\" style=\"display:none\"><font color=#ffff00>".($result_10_day_forecast->low_f+$forecast_error_lo[$x])."&plusmn".$forecast_error_lo_std[$x]."</font></div>";
+//            if( $x  > 0 ) $forecast_temperature[$x].=" <div class=\"predictedtemperature_show\" style=\"display:none\"><font color=#ffff00>".($result_10_day_forecast->low_f+$forecast_error_lo[$x])."&plusmn".$forecast_error_lo_std[$x]."</font></div>";
+            if( $x  > 0 ) {
+                if( $forecast_error_hi[$x] == "NA"){
+                    $forecast_temperature[$x].=" <div class=\"predictedtemperature_show\" style=\"display:none\"><font color=#ffff00>NA</font></div>";
+                }
+                else{
+                    $forecast_temperature[$x].=" <div class=\"predictedtemperature_show\" style=\"display:none\"><font color=#ffff00>".($result_10_day_forecast->low_f+$forecast_error_lo[$x])."</font></div>";
+                }
+            }
+//            if( $x  > 0 ) $forecast_temperature[$x].=" <div class=\"predictedtemperature_show\" style=\"display:none\"><font color=#ffff00></font></div>";
             $x++;
         ?>
     @endforeach
@@ -352,7 +433,10 @@
     <div id="forecast_box">
         <div id="forecast_title_row">
             <div id="forecast_title">DAY<P>DATE</div>
-            <?php $max= sizeof($forecast_when); ?>
+            <?php
+               $max=0;
+               if( isset($forecast_when) ) $max= sizeof($forecast_when);
+            ?>
             @for ($i = 0; $i < $max; $i++)
                <div id="forecast_title"><?php echo $forecast_when[$i] ?></div>
             @endfor
@@ -365,7 +449,10 @@
 
         <div id="forecast_temperature_row">
             <div id="forecast_temperature">HIGH<br><div class="predictedtemperature_show" style="display:none"><br /><br /></div>LOW</div>
-            <?php $max= sizeof($forecast_temperature); ?>
+            <?php
+                $max = 0;
+                if( isset( $forecast_temperature ) ) $max= sizeof($forecast_temperature);
+            ?>
             @for ($i = 0; $i < $max; $i++)
                 <div id="forecast_temperature"><?php echo $forecast_temperature[$i] ?></div>
             @endfor
@@ -373,7 +460,9 @@
 
         <div id="forecast_detail_row">
             <div id="forecast_detail"><P></div>
-            <?php $max= sizeof($forecast_detail); ?>
+            <?php
+                $max = 0;
+                if( isset($forecast_detail)  ) $max= sizeof($forecast_detail); ?>
             @for ($i = 0; $i < $max; $i++)
                 <div id="forecast_detail"><?php echo $forecast_detail[$i] ?></div>
             @endfor
