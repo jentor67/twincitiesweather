@@ -63,7 +63,7 @@ li {
 #average_stats {
     position:absolute;
     top:370px;
-    left:949px;
+    left:980px;
     width: 280px;
     height: 215px;
     background-color: #ffef80;
@@ -88,7 +88,7 @@ li {
 #station_info {
     position:absolute;
     top:100px;
-    left:949px;
+    left:980px;
     width: 280px;
     text-align:left;
     background-color: #ffef80;
@@ -131,8 +131,9 @@ li {
     position: absolute;
     top:480px;
     left:255px;
-    width: 860px;
+    width: 730px;
     text-align: left;
+
 }
 #forecast_title {
     font-size: 7pt;
@@ -175,6 +176,7 @@ li {
     font-family:arial, sans-serif;
     top: 30px;
     width: 59px;
+
     float: left;
     text-align: center;
     padding-right: 5px;
@@ -182,17 +184,17 @@ li {
 
 
 #forecast_title_row {
-    position: absolute;
-    top:0;
-    width: 960px;
+    position: relative;
+/*    top:0; */
+    width: 720px;
     text-align: left;
 }
 
 #forecast_error_row {
-    position: absolute;
-    top:20px;
-    left:15px;
-    width: 960px;
+    position: relative;
+/*    top:20px; */
+/*    left:15px; */
+    width: 720px;
     text-align: left;
     color: #ffff00;
     font-size: 8pt;
@@ -200,24 +202,23 @@ li {
 }
 
 #forecast_temperature_row {
-    position: absolute;
-    top:58px;
-    width: 960px;
+    position: relative;
+/*    top:58px; */
+    width: 720px;
     text-align: left;
 }
 
 #forecast_detail_row {
-    position: absolute;
-    top:110px;
-    width: 960px;
+    position: relative;
+    /*top:110px;*/
+    width: 730px;
     text-align: left;
-
 }
 
 #copy_write {
     position: absolute;
     top: 640px;
-    left: 949px;
+    left: 990px;
     text-align: left;
 }
 
@@ -227,11 +228,10 @@ li {
     text-align: center;
     vertical-align: middle;
     top: 10px;
-    left: 949px;
+    left: 980px;
     width: 280px;
     height: 75px;
     padding: 5px;
-
     background-color: white;
 
 }
@@ -242,7 +242,7 @@ li {
     text-align: center;
     vertical-align: middle;
     top: 278px;
-    left: 949px;
+    left: 980px;
     width: 280px;
     height: 75px;
     padding: 5px;
@@ -255,11 +255,10 @@ li {
     margin: auto;
     text-align: center;
     vertical-align: middle;
-    top: 350px;
+    top: 323px;
     left: 790px;
-    width: 150px;
-    height: 110px;
-
+    width: 180px;
+    height: 140px;
 
 }
 
