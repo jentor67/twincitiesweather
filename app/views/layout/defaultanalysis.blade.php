@@ -26,6 +26,8 @@
 
     <body>
 
+        @yield('copywrite')
+
         @yield('main')
 
         @yield('controller')
@@ -35,6 +37,8 @@
         @yield('return')
 
         @yield('title_space')
+
+        @yield('advertising1')
 
     </body>
 
