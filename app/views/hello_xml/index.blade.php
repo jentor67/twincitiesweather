@@ -1,5 +1,30 @@
 @extends('layout.default')
 
+<?php
+   //***gather all sessions
+    $observations = Session::get('observations');
+    $observations_rev = Session::get('observations_rev');
+    $distinct_stations = Session::get('distinct_stations');
+    $observation_maps = Session::get('observation_maps');
+    $result_10_day_forecasts = Session::get('result_10_day_forecasts');
+    $result_36_hour_forecasts = Session::get('result_36_hour_forecasts');
+    $historic_daily_errors = Session::get('historic_daily_errors');
+    $passed_hours_back = Session::get('passed_hours_back');
+    $stations_id = Session::get('stations_id');
+    $average_stats = Session::get('average_stats');
+    $title = Session::get('title');
+    $wind_direction = Session::get('wind_direction');
+
+
+    $shttp = 'http';
+    if( isset($_SERVER['HTTPS']) ){
+        if( $_SERVER['HTTPS'] == 'on' ) $shttp = "https";
+    }
+    $shttp = $shttp.'://'.$_SERVER['SERVER_NAME'];
+
+
+?>
+
 
 @section('testing')
 
@@ -57,7 +82,7 @@
                                             'lat'=>$distinct_station1->latitude,
                                             'lng'=>$distinct_station1->longitude,
                                             'img'=>"images/".$distinct_station1->station_id.".png",
-                                            'url'=>"?station_id_map=".$distinct_station1->stations_id));
+                                            'url'=>$shttp."?station_id_map=".$distinct_station1->stations_id));
             ?>
         @endforeach
     </select>
@@ -180,7 +205,7 @@
         </table>
     </div>
     <div id="analysis">
-        {{ Form::open(array('url' => 'analysis')) }}
+        {{ Form::open(array('url' => 'analysis/gather')) }}
         {{ Form::submit('Go to Historic Analysis') }}
         {{ Form::close() }}
     </div>
@@ -492,6 +517,15 @@
         </a>
     </div>
 
+
+@endsection
+
+@section('submit_comments')
+    <div id="submit_comments">
+        {{ Form::open(array('url' => 'comments', 'method' => 'GET')) }}
+        {{ Form::submit('Write A Comment') }}
+        {{ Form::close() }}
+    </div>
 
 @endsection
 
