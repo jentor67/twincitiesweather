@@ -77,12 +77,11 @@ li {
     top:390px;
     left:980px;
     width: 280px;
-    height: 245px;
+    height: 255px;
     background-color: #ffef80;
     text-align:left;
     border: 2px solid black;
     padding: 8px;
-    border: 2px solid;
     border-radius: 25px;
 }
 
@@ -96,7 +95,7 @@ li {
 
 #copy_write {
     position: absolute;
-    top: 655px;
+    top: 670px;
     left: 990px;
     text-align: left;
 }

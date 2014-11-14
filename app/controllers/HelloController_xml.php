@@ -4,7 +4,27 @@ class Hello_xml extends BaseController {
 
     public $restful = true;
 
+
+
     public function hello(){
+
+
+        Log::info('Hello_XML@hello');
+
+        if( Session::has('stations_id')  ) {
+            return View::make('hello_xml.index');
+        }
+        else{
+            return Redirect::to('');
+        }
+
+
+    }
+
+    public function hello_gather(){
+
+
+        Log::info('Hello_XML@hello_gather');
 
         if( Input::has('stations_id') ) {
             $stations_id = Input::get('stations_id');
@@ -29,7 +49,7 @@ class Hello_xml extends BaseController {
 
         if( $hours_back == 0 ) $hours_back=48;
 
-         //**Gather the last x hours back **
+        //**Gather the last x hours back **
         $distinct_stations = DB::select("call active_stations();");
 
         $kmsp_temperature_rev = DB::select("call list_conditions($hours_back,'',$stations_id);");
@@ -38,12 +58,14 @@ class Hello_xml extends BaseController {
 
         $get_36_hour_forecast = DB::select("call get_36_hour_forecast($stations_id);");
 
-       // $get_historic_daily_error = DB::select("call get_historic_error($stations_id,10,10);");
+        // $get_historic_daily_error = DB::select("call get_historic_error($stations_id,10,10);");
         $get_historic_daily_error = DB::select("call get_station_historic_error($stations_id);");
 
         $get_average_stats = DB::select("call past_stats();");
 
-        return View::make('hello_xml.index')
+        $dailytopten = DB::select("call calldailytopten();");
+
+        return Redirect::to('hello')
             ->with('observations',$kmsp_temperature)
             ->with('observations_rev',$kmsp_temperature_rev)
             ->with('distinct_stations',$distinct_stations)
@@ -54,9 +76,14 @@ class Hello_xml extends BaseController {
             ->with('passed_hours_back',$hours_back)
             ->with('stations_id',$stations_id)
             ->with('average_stats',$get_average_stats)
+            ->with('dailytopten',$dailytopten)
             ->with('title','Welcome to Twin Cities Weather')
             ->with('wind_direction','0');// works
+
+
     }
+
+
 
 
 }

@@ -17,8 +17,28 @@ Route::get('/', function()
 	return View::make('index');
 });
 */
+Log::info('Route');
 
-Route::get('/','Hello_xml@hello');
+Route::get('/','Hello_xml@hello_gather');
 
-Route::post('/','Hello_xml@hello');
+Route::post('/','Hello_xml@hello_gather');
+
+
+Route::get('hello','Hello_xml@hello');
+
+
+Route::get('analysis','Analysis@analysis');
+
+Route::post('analysis/gather','Analysis@analysis_gather');
+
+
+Route::get('comments','Comments@comments');
+
+Route::post('comments/submit','Comments@comments_submit');
+
+
+
+
+
+
 

@@ -10,9 +10,11 @@
 
     }";
 */
-    $css_image_box = ".image-box img {
-        transform: rotate(".$_SESSION['wind_direction']."deg);
-        -moz-transform: rotate(".$_SESSION['wind_direction']."deg);
-        -webkit-transform: rotate(".$_SESSION['wind_direction']."deg);
-    }";
+    if( isset($_SESSION['wind_direction']) ){
+        $css_image_box = ".image-box img {
+            transform: rotate(".$_SESSION['wind_direction']."deg);
+            -moz-transform: rotate(".$_SESSION['wind_direction']."deg);
+            -webkit-transform: rotate(".$_SESSION['wind_direction']."deg);
+        }";
+    }
 ?>

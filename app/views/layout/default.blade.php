@@ -107,7 +107,7 @@
     </script>
 
 
-    <link rel="stylesheet" type="text/css" href="<?php echo $shttp?>/css/main_20140816.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $shttp?>/css/main_20141110.css">
     <link rel="stylesheet" type="text/css" href="<?php echo $shttp?>/css/background_with_gradient.css">
 
 
@@ -128,7 +128,7 @@
 
     @yield('submit_comments')
 
-
+    @yield('dailytopten')
 </body>
 
 

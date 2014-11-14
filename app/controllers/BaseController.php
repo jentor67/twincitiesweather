@@ -9,6 +9,8 @@ class BaseController extends Controller {
 	 */
 	protected function setupLayout()
 	{
+
+        Log::info('BaseController@setupLayout');
 		if ( ! is_null($this->layout))
 		{
 			$this->layout = View::make($this->layout);

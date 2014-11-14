@@ -14,6 +14,7 @@
     $average_stats = Session::get('average_stats');
     $title = Session::get('title');
     $wind_direction = Session::get('wind_direction');
+    $dailytopten = Session::get('dailytopten');
 
 
     $shttp = 'http';
@@ -24,7 +25,6 @@
 
 
 ?>
-
 
 @section('testing')
 
@@ -96,8 +96,6 @@
 
 
 </div>
-
-
 
 <?php
     $unique_value = '_'.$_SERVER['REMOTE_ADDR'].'-'.$_SERVER['REMOTE_PORT'];
@@ -171,20 +169,20 @@
     <table>
         <?php $avg_stat_column = 0; ?>
         @while( $avg_stat_column < 6 )
-            <?php $avg_stat_row = 0; ?>
-            <tr>
-                @while($avg_stat_row < $avg_stat_limit)
-                    @if( $avg_stat_row == 0 )
-                        <td width="100">{{ $avg_stat[$avg_stat_row][$avg_stat_column] }}</td>
-                    @else
-                        <td width="50" align="center">{{ $avg_stat[$avg_stat_row][$avg_stat_column] }}</td>
-                    @endif
-                    <?php $avg_stat_row++; ?>
-                @endwhile
-            </tr>
-            <?php $avg_stat_column++; ?>
+        <?php $avg_stat_row = 0; ?>
+        <tr>
+            @while($avg_stat_row < $avg_stat_limit)
+            @if( $avg_stat_row == 0 )
+            <td width="100">{{ $avg_stat[$avg_stat_row][$avg_stat_column] }}</td>
+            @else
+            <td width="50" align="center">{{ $avg_stat[$avg_stat_row][$avg_stat_column] }}</td>
+            @endif
+            <?php $avg_stat_row++; ?>
+            @endwhile
+        </tr>
+        <?php $avg_stat_column++; ?>
         @endwhile
-     </table>
+    </table>
     <button class="hidestats">More Stats</button>
     <div class="stats_show" style="display:none">
         <table>
@@ -482,7 +480,7 @@
                 <div id="forecast_temperature"><?php echo $forecast_temperature[$i] ?></div>
             @endfor
         </div>
-
+        <br>
         <div id="forecast_detail_row">
             <div id="forecast_detail"><P></div>
             <?php
@@ -501,13 +499,13 @@
 
     <div id="advertising1">
         <a href="http://www.visit-twincities.com/">
-            <img src="images/msptour_logo.png" width="199" height="58">
+            <img src="images/msptour_logo.png" width="179" height="52">
         </a>
     </div>
 
     <div id="advertising2">
         <a href="https://www.metrotransit.org/">
-            <img src="images/MetroTransitLogo.png" width="199" height="58">
+            <img src="images/MetroTransitLogo.png" width="179" height="52">
         </a>
     </div>
 
@@ -529,7 +527,77 @@
 
 @endsection
 
-@section('carousel')
+@section('dailytopten')
+    <?php
+        $dailytopcount = 0;
+        $count=0;
+        $count1=0;
+    ?>
+    @foreach($dailytopten as $dailytop)
+        <?php
+            if( $dailytop->value1 == 0 && $dailytopcount > 40){
+                $year[$dailytopcount] = "";
+                $value1[$dailytopcount] = "";
+            }
+            else{
+                $year[$dailytopcount] = $dailytop->year;
+                $value1[$dailytopcount] = $dailytop->value1;
+            }
+            $dailytopcount++;
+        ?>
+    @endforeach
 
+
+    <div id="dailytopten">
+        <div style="font-size: 12px; color: black">Twin Cities Top 10 records for today</div>
+        <table border="1" style="font-size: 9px;">
+            <tr>
+                <td width="100" align="center">High</td>
+                <td width="100" align="center">Low</td>
+                <td width="100" align="center">Rain</td>
+                <td width="100" align="center">Snow</td>
+                <td width="100" align="center">Snow Cov.</td>
+            </tr>
+        </table>
+        <table border="1" style="font-size: 9px;">
+            <tr>
+                <td width="50">Year</td>
+
+                <td width="50" align="center">Temp</td>
+
+                <td width="50">Year</td>
+
+                <td width="50" align="center">Temp</td>
+
+                <td width="50">Year</td>
+
+                <td width="50" align="center">inches</td>
+
+                <td width="50">Year</td>
+
+                <td width="50" align="center">inches</td>
+
+                <td width="50">Year</td>
+
+                <td width="50" align="center">inches</td>
+            </tr>
+            @while( $count < 10 )
+                <tr>
+                    @while( $count1 < 8 )
+                        @if( $count1 == 0 || $count1 == 3 || $count1 == 4 || $count1 == 5 || $count1 == 6 )
+                            <td width="50">{{ $year[$count + $count1*10] }}</td>
+
+                            <td width="50" align="center">{{ $value1[$count + $count1*10] }}</td>
+                        @endif
+                        <?php $count1++; ?>
+                    @endwhile
+                </tr>
+                <?php
+                   $count++;
+                   $count1=0;
+                ?>
+            @endwhile
+        </table>
+    </div>
 
 @endsection

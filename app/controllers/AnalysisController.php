@@ -4,7 +4,19 @@ class Analysis extends BaseController {
 
     public $restful = true;
 
+
     public function analysis(){
+
+        Log::info('Analysis@analysis');
+
+
+        return View::make('analysis.index');
+
+    }
+
+    public function analysis_gather(){
+
+        Log::info('Analysis@analysis_gather');
 
         $start_year='1873';
         if( Input::has('start_year') ) $start_year = Input::get('start_year');
@@ -26,13 +38,13 @@ class Analysis extends BaseController {
 
         $historic_segments = DB::select("call historic_segment('$start_segment', '$end_segment' ,$start_year,$end_year,$segments);");
 
-        return View::make('analysis.index')
+        return Redirect::to('analysis')
             ->with('start_year',$start_year)
             ->with('end_year',$end_year)
             ->with('start_segment',$start_segment)
             ->with('end_segment',$end_segment)
-            ->with('historic_segments',$historic_segments);
-
+            ->with('historic_segments',$historic_segments)
+            ->with('start_low_year','1873')
+            ->with('end_high_year','2012');
     }
-
 }

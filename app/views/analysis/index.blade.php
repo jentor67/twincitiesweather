@@ -4,10 +4,23 @@
 @section('main')
     <?php
         $unique_value = '_'.$_SERVER['REMOTE_ADDR'].'-'.$_SERVER['REMOTE_PORT'];
+
         $row_counts = 0;
         $hist_max_hi = -200;
         $hist_min_low = 200;
         $rain_max =0;
+        $historic_segments = Session::get('historic_segments');
+        $start_year = Session::get('start_year');
+        $end_year = Session::get('end_year');
+        $start_segment = Session::get('start_segment');
+        $end_segment = Session::get('end_segment');
+    /*
+                 ->with('start_year',$start_year)
+            ->with('end_year',$end_year)
+            ->with('start_segment',$start_segment)
+            ->with('end_segment',$end_segment)
+            ->with('historic_segments',$historic_segments);
+     */
     ?>
 
 
@@ -89,14 +102,14 @@
         <p>Put a beginning year and end year between 1873 - 2012</p>
 
 
-        {{ Form::open(array('url' => 'analysis','method' => 'POST')) }}
+        {{ Form::open(array('url' => 'analysis/gather','method' => 'POST')) }}
 
         {{ Form::token() }}
 
         <?php
             //***Create Year Array****
-            $historic_start_year = $start_year;
-            $historic_end_year = $end_year;
+            $historic_start_year = Session::get('start_low_year');
+            $historic_end_year = Session::get('end_high_year');
 
             $i=$historic_start_year;
             while( $i <= $historic_end_year){
@@ -162,6 +175,13 @@
 @endsection
 
 
+@section('copywrite')
+    <div id="copy_write" style="font-size: 8px;">
+        &copy 2014 twincitiesweather.info All Rights Reserved
+    </div>
+@endsection
+
+
 @section('instructions')
     <div id="instructions">
         This section lets the user create graphs from historical data going back from 1873 to 2012.
@@ -175,7 +195,7 @@
         End  Date: <b>Jul 14</b><br />
         Segments: <b>20</b><br />
         <br />
-        <b>Explanation</b>: What this did was to determine the best fit go meet the max segments and to include the year 1950.  In this case it chose to start on 1949 and
+        <b>Explanation</b>: What this did was to determine the best fit to meet the max segments and to include the year 1950.  In this case it chose to start on 1949 and
         have 3 years per segment.  Therefore the first segment 1949-1951 is the average temperature of all 3 years for the dates July 7 - July 14<br />
         <br />
         If the user wants a data point for each year then set the Max Segments = 41 or above.
@@ -196,6 +216,14 @@
 @section('title_space')
     <div id="title_space">
         Twin Cities Weather - Historic Analysis
+    </div>
+@endsection
+
+@section('advertising1')
+    <div id="advertising1">
+        <a href="http://www.umn.edu/">
+            <img src="images/UofM.jpg" width="194" height="117">
+        </a>
     </div>
 @endsection
 
