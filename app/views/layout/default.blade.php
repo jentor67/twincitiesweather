@@ -107,7 +107,7 @@
     </script>
 
 
-    <link rel="stylesheet" type="text/css" href="<?php echo $shttp?>/css/main_20141110.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo $shttp?>/css/main_20141125.css">
     <link rel="stylesheet" type="text/css" href="<?php echo $shttp?>/css/background_with_gradient.css">
 
 
