@@ -1,0 +1,304 @@
+@import url(//fonts.googleapis.com/css?family=Lato:700);
+
+table
+{
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse:collapse;
+    font-size : 75%;
+}
+
+li {
+    position: relative;
+    left: -20px;
+}
+
+.table_color_green {
+    border: 1px solid green;
+    text-align:center;
+}
+
+.table_summary {
+    text-align:left;
+}
+
+#advertising1 {
+    position: absolute;
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    top: 10px;
+    left: 785px;
+    width: 180px;
+    height: 75px;
+    padding: 5px;
+    background-color: white;
+
+}
+
+#advertising2 {
+    position: absolute;
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    top: 200px;
+    left: 785px;
+    width: 180px;
+    height: 75px;
+    padding: 5px;
+    background-color: white;
+
+}
+
+#advertising3 {
+    position: absolute;
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    top: 323px;
+    left: 785px;
+    width: 180px;
+    height: 140px;
+}
+
+#analysis{
+    text-align: center;
+    vertical-align: middle;
+    width: 180px;
+    height: 30px;
+    background-color: red;
+    padding: 5px;
+    border: 2px solid;
+    border-radius: 30px;
+}
+
+#average_stats {
+    position:absolute;
+    top:235px;
+    left:980px;
+    width: 280px;
+    height: 255px;
+    background-color: #ffef80;
+    text-align:left;
+    border: 2px solid black;
+    padding: 8px;
+    border-radius: 25px;
+}
+
+#back_history {
+    position:absolute;
+    top:220px;
+    left:10px;
+    width: 280px;
+    text-align:left;
+}
+
+#copy_write {
+    position: absolute;
+    top: 730px;
+    left: 990px;
+    text-align: left;
+}
+
+#dailytopten {
+    position:absolute;
+    top:515px;
+    left:980px;
+    width: 280px;
+    height: 185px;
+    background-color: #ffef80;
+    text-align:left;
+    color: black;
+    border: 2px solid black;
+    padding: 8px;
+    border-radius: 25px;
+}
+
+#forecast_box {
+    position: absolute;
+    top:480px;
+    left:255px;
+    text-align: left;
+
+
+}
+
+#forecast_detail {
+    font-size: 6pt;
+    line-height: 95%;
+    font-family:arial, sans-serif;
+    top: 30px;
+    width: 60px;
+    float: left;
+    text-align: center;
+
+}
+
+#forecast_detail_row {
+    position: relative;
+    text-align: left;
+}
+
+#forecast_error {
+    font-size: 6pt;
+    line-height: 20%;
+    color: black;
+    font-weight: 900;
+    font-family:arial, sans-serif;
+    top: 30px;
+    width: 60px;
+    float: left;
+    text-align: center;
+}
+
+#forecast_error_row {
+    position: relative;
+    text-align: left;
+    color: #ffff00;
+    font-size: 8pt;
+    font-weight: 900;
+}
+
+#forecast_temperature {
+    font-size: 8pt;
+    font-family:arial, sans-serif;
+    width: 60px;
+    float: left;
+    text-align: center;
+}
+
+#forecast_temperature_row {
+    position: relative;
+    text-align: left;
+}
+
+#forecast_title {
+    font-size: 7pt;
+    line-height: 40%;
+    font-weight: 900;
+    font-family:arial, sans-serif;
+    width: 60px;
+    text-align: center;
+    float: left;
+}
+
+#forecast_title_row {
+    position: relative;
+    text-align: left;
+}
+
+#graph_div {
+    width: 240px;
+    height: 120px;
+}
+
+#graph_group {
+    position:absolute;
+    top:250px;
+    left: 10px;
+
+}
+
+#image1 {
+    width: 240px;
+    height: 120px;
+}
+
+#image1:active {
+    width: 600px;
+    height: 400px;
+}
+
+#image2 {
+    width: 240px;
+    height: 120px;
+}
+
+#map_canvas {
+    position:absolute;
+    width: 508px;
+    height: 363px;
+    top: 100px;
+    left: 270px;
+    border: 2px solid black;
+    /*margin-left:auto;
+    margin-right:auto; */
+}
+
+#map_legend {
+    position:absolute;
+    top:100px;
+    left:133px;
+    width: 115px;
+    height: 100px;
+    background-color: #ffef80;
+    text-align:left;
+    border: 2px solid black;
+    padding: 8px;
+    border: 2px solid;
+    border-radius: 25px;
+}
+
+#station_info {
+    position:absolute;
+    top:10px;
+    left:980px;
+    width: 280px;
+    height: 200px;
+    text-align:left;
+    background-color: #ffef80;
+    border:1px solid black;
+    padding: 8px;
+    border: 2px solid;
+    border-radius: 25px;
+}
+
+#station_select {
+    position: absolute;
+    top:70px;
+    left:300px;
+    width: 769px;
+}
+
+#submit_comments{
+    position:absolute;
+    text-align: center;
+    vertical-align: middle;
+    top: 40px;
+    left: 40px;
+    width: 180px;
+    height: 30px;
+    background-color: #ffef80;
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 30px;
+}
+
+#title_space {
+    position: absolute;
+    top:10px;
+    left:170px;
+    width: 769px;
+    text-align: center;
+}
+
+#weather_forecast {
+    position: absolute;
+    top:690px;
+    left:170px;
+    width: 769px;
+    text-align: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
