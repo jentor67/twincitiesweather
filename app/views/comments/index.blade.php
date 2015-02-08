@@ -68,7 +68,7 @@
 
 @section('copywrite')
     <div id="copy_write" style="font-size: 8px;">
-        &copy 2014 twincitiesweather.info All Rights Reserved
+        &copy 2015 twincitiesweather.info All Rights Reserved
     </div>
 @endsection
 
