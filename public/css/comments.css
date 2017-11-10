@@ -106,3 +106,16 @@
     text-align: center;
     
 }
+
+#title_space1 {
+    font-size: 36pt;
+    line-height: 110%;
+    font-weight: 400;
+    font-family:arial, sans-serif;
+    position: absolute;
+    top:10px;
+    left:100px;
+    width: 895px;
+    text-align: center;
+    
+}
